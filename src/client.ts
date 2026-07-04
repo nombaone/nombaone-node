@@ -2,6 +2,12 @@ import { NombaoneError } from './error.js';
 import { APIPromise } from './api-promise.js';
 import { Page, PagePromise } from './pagination.js';
 import { performRequest, type TransportConfig } from './internal/http.js';
+import { Coupons } from './resources/coupons.js';
+import { Customers } from './resources/customers.js';
+import { Invoices } from './resources/invoices.js';
+import { Plans } from './resources/plans.js';
+import { Prices } from './resources/prices.js';
+import { Subscriptions } from './resources/subscriptions.js';
 
 import type { Mode, RequestSpec, TransportResult } from './core-types.js';
 
@@ -65,6 +71,19 @@ export class Nombaone {
   readonly baseUrl: string;
 
   readonly #config: TransportConfig;
+
+  /** Customers — the people and businesses you bill. */
+  readonly customers: Customers = new Customers(this);
+  /** Plans — your catalog (prices nest under `plans.prices`). */
+  readonly plans: Plans = new Plans(this);
+  /** Prices — immutable amounts and cadences. */
+  readonly prices: Prices = new Prices(this);
+  /** Subscriptions — the core billing object. */
+  readonly subscriptions: Subscriptions = new Subscriptions(this);
+  /** Invoices — what billing cycles produced (read + void). */
+  readonly invoices: Invoices = new Invoices(this);
+  /** Coupons — reusable discount rules. */
+  readonly coupons: Coupons = new Coupons(this);
 
   constructor(apiKey?: string | NombaoneOptions, options: NombaoneOptions = {}) {
     const opts: NombaoneOptions =

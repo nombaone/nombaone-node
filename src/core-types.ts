@@ -19,8 +19,8 @@ export type Mode = 'sandbox' | 'live';
  */
 export type Kobo = number;
 
-/** Free-form string-to-string annotations you can attach to most resources. */
-export type Metadata = Record<string, string>;
+/** Free-form annotations you can attach to most resources. */
+export type Metadata = Record<string, unknown>;
 
 /** Cursor-pagination block returned at the top level of every list response. */
 export interface ApiPagination {
