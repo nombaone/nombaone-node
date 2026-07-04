@@ -1,0 +1,75 @@
+{
+  "name": "@nombaone/node",
+  "version": "0.1.0",
+  "description": "Official Node.js SDK for the NombaOne subscription-billing API",
+  "keywords": [
+    "nombaone",
+    "nomba",
+    "billing",
+    "subscriptions",
+    "payments",
+    "nigeria",
+    "api",
+    "sdk"
+  ],
+  "homepage": "https://docs.nombaone.xyz",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nombaone/nombaone-node.git"
+  },
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest run test/unit test/conformance",
+    "test:watch": "vitest test/unit test/conformance",
+    "test:integration": "vitest run test/integration",
+    "typecheck": "tsc --noEmit",
+    "lint": "prettier --check .",
+    "format": "prettier --write .",
+    "check:package": "publint && attw --pack .",
+    "openapi:update": "node scripts/update-openapi.mjs",
+    "version": "changeset version && node scripts/sync-version.mjs && prettier --write package.json src/version.ts",
+    "release": "pnpm build && changeset publish"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.2",
+    "@changesets/cli": "^2.29.0",
+    "@types/node": "^22.15.0",
+    "prettier": "^3.5.0",
+    "publint": "^0.3.12",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.0"
+  },
+  "packageManager": "pnpm@11.7.0"
+}
