@@ -100,7 +100,10 @@ export class OrganizationBilling extends APIResource {
    * });
    * ```
    */
-  update(params: BillingSettingsUpdateParams, options?: RequestOptions): APIPromise<BillingSettings> {
+  update(
+    params: BillingSettingsUpdateParams,
+    options?: RequestOptions
+  ): APIPromise<BillingSettings> {
     return this._client.request<BillingSettings>({
       method: 'put',
       path: '/organization/billing',

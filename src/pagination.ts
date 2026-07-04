@@ -39,9 +39,7 @@ export class Page<Item> implements AsyncIterable<Item> {
   async nextPage(): Promise<Page<Item>> {
     const cursor = this.pagination.nextCursor;
     if (cursor === null) {
-      throw new Error(
-        'No next page available — check hasNextPage() before calling nextPage().'
-      );
+      throw new Error('No next page available — check hasNextPage() before calling nextPage().');
     }
     const spec: RequestSpec = { ...this.#spec, query: { ...this.#spec.query, cursor } };
     const result = await this.#fetcher<Item>(spec);

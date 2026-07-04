@@ -29,7 +29,13 @@ export interface MockFetch {
   /** Queue a NombaOne error envelope. */
   fail(
     status: number,
-    error: { code: string; message?: string; hint?: string; docUrl?: string; fields?: Record<string, string[]> },
+    error: {
+      code: string;
+      message?: string;
+      hint?: string;
+      docUrl?: string;
+      fields?: Record<string, string[]>;
+    },
     headers?: Record<string, string>
   ): void;
   /** Queue a transport-level failure (network error, abort). */

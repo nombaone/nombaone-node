@@ -30,8 +30,7 @@ export const parseSuccessEnvelope = (body: unknown, headers: Headers): ParsedSuc
 
   let pagination: ApiPagination | undefined;
   const rawPagination = envelope.pagination as
-    | { limit?: unknown; hasMore?: unknown; nextCursor?: unknown }
-    | undefined;
+    { limit?: unknown; hasMore?: unknown; nextCursor?: unknown } | undefined;
   if (
     typeof rawPagination === 'object' &&
     rawPagination !== null &&

@@ -42,28 +42,18 @@
       },
       "ApiError": {
         "type": "object",
-        "required": [
-          "success",
-          "error"
-        ],
+        "required": ["success", "error"],
         "properties": {
           "success": {
             "type": "boolean",
-            "enum": [
-              false
-            ]
+            "enum": [false]
           },
           "statusCode": {
             "type": "integer"
           },
           "error": {
             "type": "object",
-            "required": [
-              "code",
-              "message",
-              "hint",
-              "docUrl"
-            ],
+            "required": ["code", "message", "hint", "docUrl"],
             "properties": {
               "code": {
                 "type": "string",
@@ -173,9 +163,7 @@
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "customer"
-            ]
+            "enum": ["customer"]
           },
           "id": {
             "type": "string"
@@ -196,10 +184,7 @@
           },
           "mode": {
             "type": "string",
-            "enum": [
-              "test",
-              "live"
-            ]
+            "enum": ["test", "live"]
           },
           "createdAt": {
             "type": "string",
@@ -227,9 +212,7 @@
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "plan"
-            ]
+            "enum": ["plan"]
           },
           "id": {
             "type": "string"
@@ -243,10 +226,7 @@
           },
           "status": {
             "type": "string",
-            "enum": [
-              "active",
-              "archived"
-            ]
+            "enum": ["active", "archived"]
           },
           "metadata": {
             "type": "object",
@@ -254,10 +234,7 @@
           },
           "mode": {
             "type": "string",
-            "enum": [
-              "test",
-              "live"
-            ]
+            "enum": ["test", "live"]
           },
           "createdAt": {
             "type": "string",
@@ -285,9 +262,7 @@
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "price"
-            ]
+            "enum": ["price"]
           },
           "id": {
             "type": "string"
@@ -300,35 +275,22 @@
           },
           "currency": {
             "type": "string",
-            "enum": [
-              "NGN"
-            ]
+            "enum": ["NGN"]
           },
           "interval": {
             "type": "string",
-            "enum": [
-              "day",
-              "week",
-              "month",
-              "year"
-            ]
+            "enum": ["day", "week", "month", "year"]
           },
           "intervalCount": {
             "type": "integer"
           },
           "usageType": {
             "type": "string",
-            "enum": [
-              "licensed",
-              "metered"
-            ]
+            "enum": ["licensed", "metered"]
           },
           "billingScheme": {
             "type": "string",
-            "enum": [
-              "per_unit",
-              "tiered"
-            ]
+            "enum": ["per_unit", "tiered"]
           },
           "trialPeriodDays": {
             "type": "integer"
@@ -342,10 +304,7 @@
           },
           "mode": {
             "type": "string",
-            "enum": [
-              "test",
-              "live"
-            ]
+            "enum": ["test", "live"]
           },
           "createdAt": {
             "type": "string",
@@ -382,20 +341,14 @@
             "type": "integer"
           }
         },
-        "required": [
-          "id",
-          "priceId",
-          "quantity"
-        ]
+        "required": ["id", "priceId", "quantity"]
       },
       "Subscription": {
         "type": "object",
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "subscription"
-            ]
+            "enum": ["subscription"]
           },
           "id": {
             "type": "string"
@@ -420,10 +373,7 @@
           },
           "collectionMethod": {
             "type": "string",
-            "enum": [
-              "charge_automatically",
-              "send_invoice"
-            ]
+            "enum": ["charge_automatically", "send_invoice"]
           },
           "currentPeriodIndex": {
             "type": "integer"
@@ -463,10 +413,7 @@
           },
           "cancellationReason": {
             "type": "string",
-            "enum": [
-              "voluntary",
-              "involuntary"
-            ],
+            "enum": ["voluntary", "involuntary"],
             "nullable": true
           },
           "defaultPaymentMethodId": {
@@ -485,16 +432,11 @@
           },
           "currency": {
             "type": "string",
-            "enum": [
-              "NGN"
-            ]
+            "enum": ["NGN"]
           },
           "mode": {
             "type": "string",
-            "enum": [
-              "test",
-              "live"
-            ]
+            "enum": ["test", "live"]
           },
           "createdAt": {
             "type": "string",
@@ -533,13 +475,7 @@
           },
           "kind": {
             "type": "string",
-            "enum": [
-              "subscription",
-              "proration",
-              "discount",
-              "credit",
-              "adjustment"
-            ]
+            "enum": ["subscription", "proration", "discount", "credit", "adjustment"]
           },
           "description": {
             "type": "string"
@@ -551,22 +487,14 @@
             "type": "integer"
           }
         },
-        "required": [
-          "id",
-          "kind",
-          "description",
-          "amountInKobo",
-          "quantity"
-        ]
+        "required": ["id", "kind", "description", "amountInKobo", "quantity"]
       },
       "Invoice": {
         "type": "object",
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "invoice"
-            ]
+            "enum": ["invoice"]
           },
           "id": {
             "type": "string"
@@ -580,23 +508,11 @@
           },
           "status": {
             "type": "string",
-            "enum": [
-              "draft",
-              "open",
-              "partially_paid",
-              "paid",
-              "void",
-              "uncollectible"
-            ]
+            "enum": ["draft", "open", "partially_paid", "paid", "void", "uncollectible"]
           },
           "billingReason": {
             "type": "string",
-            "enum": [
-              "subscription_create",
-              "subscription_cycle",
-              "subscription_update",
-              "manual"
-            ]
+            "enum": ["subscription_create", "subscription_cycle", "subscription_update", "manual"]
           },
           "subtotalInKobo": {
             "type": "integer"
@@ -621,9 +537,7 @@
           },
           "currency": {
             "type": "string",
-            "enum": [
-              "NGN"
-            ]
+            "enum": ["NGN"]
           },
           "periodStart": {
             "type": "string",
@@ -663,10 +577,7 @@
           },
           "mode": {
             "type": "string",
-            "enum": [
-              "test",
-              "live"
-            ]
+            "enum": ["test", "live"]
           },
           "createdAt": {
             "type": "string",
@@ -704,9 +615,7 @@
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "coupon"
-            ]
+            "enum": ["coupon"]
           },
           "id": {
             "type": "string"
@@ -716,11 +625,7 @@
           },
           "duration": {
             "type": "string",
-            "enum": [
-              "once",
-              "repeating",
-              "forever"
-            ]
+            "enum": ["once", "repeating", "forever"]
           },
           "amountOffInKobo": {
             "type": "integer",
@@ -748,10 +653,7 @@
           },
           "mode": {
             "type": "string",
-            "enum": [
-              "test",
-              "live"
-            ]
+            "enum": ["test", "live"]
           },
           "createdAt": {
             "type": "string",
@@ -778,9 +680,7 @@
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "discount"
-            ]
+            "enum": ["discount"]
           },
           "id": {
             "type": "string"
@@ -798,10 +698,7 @@
           },
           "status": {
             "type": "string",
-            "enum": [
-              "active",
-              "ended"
-            ]
+            "enum": ["active", "ended"]
           },
           "cyclesRemaining": {
             "type": "integer",
@@ -818,10 +715,7 @@
           },
           "mode": {
             "type": "string",
-            "enum": [
-              "test",
-              "live"
-            ]
+            "enum": ["test", "live"]
           },
           "createdAt": {
             "type": "string",
@@ -847,9 +741,7 @@
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "credit_grant"
-            ]
+            "enum": ["credit_grant"]
           },
           "id": {
             "type": "string"
@@ -865,12 +757,7 @@
           },
           "source": {
             "type": "string",
-            "enum": [
-              "downgrade_proration",
-              "manual",
-              "goodwill",
-              "coupon"
-            ]
+            "enum": ["downgrade_proration", "manual", "goodwill", "coupon"]
           },
           "sourceReference": {
             "type": "string",
@@ -878,10 +765,7 @@
           },
           "mode": {
             "type": "string",
-            "enum": [
-              "test",
-              "live"
-            ]
+            "enum": ["test", "live"]
           },
           "voidedAt": {
             "type": "string",
@@ -911,9 +795,7 @@
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "credit_balance"
-            ]
+            "enum": ["credit_balance"]
           },
           "customerId": {
             "type": "string"
@@ -928,21 +810,14 @@
             }
           }
         },
-        "required": [
-          "domain",
-          "customerId",
-          "balanceInKobo",
-          "grants"
-        ]
+        "required": ["domain", "customerId", "balanceInKobo", "grants"]
       },
       "PaymentMethod": {
         "type": "object",
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "payment_method"
-            ]
+            "enum": ["payment_method"]
           },
           "id": {
             "type": "string"
@@ -952,21 +827,11 @@
           },
           "kind": {
             "type": "string",
-            "enum": [
-              "card",
-              "mandate",
-              "virtual_account"
-            ]
+            "enum": ["card", "mandate", "virtual_account"]
           },
           "status": {
             "type": "string",
-            "enum": [
-              "setup_pending",
-              "consent_pending",
-              "active",
-              "removed",
-              "expired"
-            ]
+            "enum": ["setup_pending", "consent_pending", "active", "removed", "expired"]
           },
           "isDefault": {
             "type": "boolean"
@@ -989,10 +854,7 @@
           },
           "mode": {
             "type": "string",
-            "enum": [
-              "test",
-              "live"
-            ]
+            "enum": ["test", "live"]
           },
           "createdAt": {
             "type": "string",
@@ -1024,9 +886,7 @@
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "settlement"
-            ]
+            "enum": ["settlement"]
           },
           "id": {
             "type": "string"
@@ -1056,13 +916,7 @@
           },
           "status": {
             "type": "string",
-            "enum": [
-              "pending",
-              "settled",
-              "reconciled",
-              "failed",
-              "refunded"
-            ]
+            "enum": ["pending", "settled", "reconciled", "failed", "refunded"]
           },
           "createdAt": {
             "type": "string",
@@ -1088,9 +942,7 @@
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "webhook"
-            ]
+            "enum": ["webhook"]
           },
           "id": {
             "type": "string"
@@ -1132,9 +984,7 @@
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "webhook_delivery"
-            ]
+            "enum": ["webhook_delivery"]
           },
           "id": {
             "type": "string"
@@ -1150,12 +1000,7 @@
           },
           "status": {
             "type": "string",
-            "enum": [
-              "pending",
-              "succeeded",
-              "failed",
-              "dead"
-            ]
+            "enum": ["pending", "succeeded", "failed", "dead"]
           },
           "attempts": {
             "type": "integer"
@@ -1208,9 +1053,7 @@
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "webhook_secret"
-            ]
+            "enum": ["webhook_secret"]
           },
           "id": {
             "type": "string"
@@ -1222,21 +1065,14 @@
             "type": "string"
           }
         },
-        "required": [
-          "domain",
-          "id",
-          "signingSecret",
-          "signingSecretPrefix"
-        ]
+        "required": ["domain", "id", "signingSecret", "signingSecretPrefix"]
       },
       "DomainEvent": {
         "type": "object",
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "event"
-            ]
+            "enum": ["event"]
           },
           "id": {
             "type": "string"
@@ -1253,22 +1089,14 @@
             "format": "date-time"
           }
         },
-        "required": [
-          "domain",
-          "id",
-          "type",
-          "payload",
-          "createdAt"
-        ]
+        "required": ["domain", "id", "type", "payload", "createdAt"]
       },
       "DunningAttempt": {
         "type": "object",
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "dunning_attempt"
-            ]
+            "enum": ["dunning_attempt"]
           },
           "id": {
             "type": "string"
@@ -1289,11 +1117,7 @@
           },
           "branch": {
             "type": "string",
-            "enum": [
-              "reschedule",
-              "card_update_required",
-              "short_path"
-            ]
+            "enum": ["reschedule", "card_update_required", "short_path"]
           },
           "railKey": {
             "type": "string",
@@ -1351,9 +1175,7 @@
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "dunning_state"
-            ]
+            "enum": ["dunning_state"]
           },
           "subscriptionRef": {
             "type": "string"
@@ -1414,19 +1236,14 @@
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "billing_settings"
-            ]
+            "enum": ["billing_settings"]
           },
           "partialCollectionEnabled": {
             "type": "boolean"
           },
           "prorationCreditPolicy": {
             "type": "string",
-            "enum": [
-              "credit_next_cycle",
-              "none"
-            ]
+            "enum": ["credit_next_cycle", "none"]
           },
           "dunningMaxAttempts": {
             "type": "integer"
@@ -1457,10 +1274,7 @@
           },
           "defaultCollectionMethod": {
             "type": "string",
-            "enum": [
-              "charge_automatically",
-              "send_invoice"
-            ]
+            "enum": ["charge_automatically", "send_invoice"]
           },
           "commsEnabled": {
             "type": "boolean"
@@ -1486,9 +1300,7 @@
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "organization"
-            ]
+            "enum": ["organization"]
           },
           "billing": {
             "type": "object",
@@ -1503,10 +1315,7 @@
               },
               "settlementMode": {
                 "type": "string",
-                "enum": [
-                  "split_at_collection",
-                  "collect_then_payout"
-                ]
+                "enum": ["split_at_collection", "collect_then_payout"]
               },
               "platformFee": {
                 "type": "object",
@@ -1524,11 +1333,7 @@
                     "nullable": true
                   }
                 },
-                "required": [
-                  "bps",
-                  "minInKobo",
-                  "maxInKobo"
-                ]
+                "required": ["bps", "minInKobo", "maxInKobo"]
               },
               "grace": {
                 "type": "object",
@@ -1540,10 +1345,7 @@
                     "type": "integer"
                   }
                 },
-                "required": [
-                  "gracePeriodHours",
-                  "dunningMaxAttempts"
-                ]
+                "required": ["gracePeriodHours", "dunningMaxAttempts"]
               },
               "branding": {
                 "type": "object",
@@ -1588,11 +1390,7 @@
                 "type": "boolean"
               }
             },
-            "required": [
-              "url",
-              "signingSecretPrefix",
-              "configured"
-            ]
+            "required": ["url", "signingSecretPrefix", "configured"]
           },
           "nombaAccount": {
             "type": "object",
@@ -1606,18 +1404,10 @@
                 "nullable": true
               }
             },
-            "required": [
-              "accountRef",
-              "status"
-            ]
+            "required": ["accountRef", "status"]
           }
         },
-        "required": [
-          "domain",
-          "billing",
-          "webhook",
-          "nombaAccount"
-        ]
+        "required": ["domain", "billing", "webhook", "nombaAccount"]
       },
       "DunningFunnel": {
         "type": "object",
@@ -1655,9 +1445,7 @@
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "billing_metrics"
-            ]
+            "enum": ["billing_metrics"]
           },
           "mrrInKobo": {
             "type": "integer"
@@ -1720,20 +1508,14 @@
             "nullable": true
           }
         },
-        "required": [
-          "startIndex",
-          "priceId",
-          "consumedAt"
-        ]
+        "required": ["startIndex", "priceId", "consumedAt"]
       },
       "SubscriptionSchedule": {
         "type": "object",
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "subscription_schedule"
-            ]
+            "enum": ["subscription_schedule"]
           },
           "id": {
             "type": "string"
@@ -1743,11 +1525,7 @@
           },
           "status": {
             "type": "string",
-            "enum": [
-              "active",
-              "released",
-              "canceled"
-            ]
+            "enum": ["active", "released", "canceled"]
           },
           "phases": {
             "type": "array",
@@ -1757,10 +1535,7 @@
           },
           "mode": {
             "type": "string",
-            "enum": [
-              "test",
-              "live"
-            ]
+            "enum": ["test", "live"]
           },
           "createdAt": {
             "type": "string",
@@ -1787,9 +1562,7 @@
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "upcoming_invoice"
-            ]
+            "enum": ["upcoming_invoice"]
           },
           "subscriptionId": {
             "type": "string"
@@ -1807,12 +1580,7 @@
           },
           "billingReason": {
             "type": "string",
-            "enum": [
-              "subscription_create",
-              "subscription_cycle",
-              "subscription_update",
-              "manual"
-            ]
+            "enum": ["subscription_create", "subscription_cycle", "subscription_update", "manual"]
           },
           "subtotalInKobo": {
             "type": "integer"
@@ -1825,9 +1593,7 @@
           },
           "currency": {
             "type": "string",
-            "enum": [
-              "NGN"
-            ]
+            "enum": ["NGN"]
           },
           "lineItems": {
             "type": "array",
@@ -1837,10 +1603,7 @@
           },
           "mode": {
             "type": "string",
-            "enum": [
-              "test",
-              "live"
-            ]
+            "enum": ["test", "live"]
           }
         },
         "required": [
@@ -1863,43 +1626,29 @@
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "example"
-            ]
+            "enum": ["example"]
           },
           "id": {
             "type": "string"
           },
           "kind": {
             "type": "string",
-            "enum": [
-              "standard",
-              "priority"
-            ]
+            "enum": ["standard", "priority"]
           },
           "status": {
             "type": "string",
-            "enum": [
-              "pending",
-              "settled",
-              "failed"
-            ]
+            "enum": ["pending", "settled", "failed"]
           },
           "amountInKobo": {
             "type": "integer"
           },
           "currency": {
             "type": "string",
-            "enum": [
-              "NGN"
-            ]
+            "enum": ["NGN"]
           },
           "mode": {
             "type": "string",
-            "enum": [
-              "test",
-              "live"
-            ]
+            "enum": ["test", "live"]
           },
           "createdAt": {
             "type": "string",
@@ -1922,9 +1671,7 @@
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "checkout_setup"
-            ]
+            "enum": ["checkout_setup"]
           },
           "reference": {
             "type": "string"
@@ -1933,20 +1680,14 @@
             "type": "string"
           }
         },
-        "required": [
-          "domain",
-          "reference",
-          "checkoutLink"
-        ]
+        "required": ["domain", "reference", "checkoutLink"]
       },
       "MandateSetup": {
         "type": "object",
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "mandate_setup"
-            ]
+            "enum": ["mandate_setup"]
           },
           "reference": {
             "type": "string"
@@ -1961,22 +1702,14 @@
             "type": "string"
           }
         },
-        "required": [
-          "domain",
-          "reference",
-          "mandateRef",
-          "status",
-          "consentInstruction"
-        ]
+        "required": ["domain", "reference", "mandateRef", "status", "consentInstruction"]
       },
       "VirtualAccount": {
         "type": "object",
         "properties": {
           "domain": {
             "type": "string",
-            "enum": [
-              "virtual_account"
-            ]
+            "enum": ["virtual_account"]
           },
           "reference": {
             "type": "string"
@@ -2027,16 +1760,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -2091,16 +1819,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -2153,10 +1876,7 @@
                     "additionalProperties": {}
                   }
                 },
-                "required": [
-                  "email",
-                  "name"
-                ],
+                "required": ["email", "name"],
                 "additionalProperties": false
               }
             }
@@ -2207,16 +1927,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -2273,16 +1988,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -2342,16 +2052,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -2441,16 +2146,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -2489,9 +2189,7 @@
                     "minLength": 1
                   }
                 },
-                "required": [
-                  "coupon"
-                ],
+                "required": ["coupon"],
                 "additionalProperties": false
               }
             }
@@ -2530,16 +2228,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -2602,16 +2295,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -2652,10 +2340,7 @@
                   },
                   "source": {
                     "type": "string",
-                    "enum": [
-                      "manual",
-                      "goodwill"
-                    ],
+                    "enum": ["manual", "goodwill"],
                     "default": "manual"
                   },
                   "sourceReference": {
@@ -2666,9 +2351,7 @@
                     "additionalProperties": {}
                   }
                 },
-                "required": [
-                  "amountInKobo"
-                ],
+                "required": ["amountInKobo"],
                 "additionalProperties": false
               }
             }
@@ -2699,16 +2382,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -2778,16 +2456,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -2841,16 +2514,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -2898,9 +2566,7 @@
                     "additionalProperties": {}
                   }
                 },
-                "required": [
-                  "name"
-                ],
+                "required": ["name"],
                 "additionalProperties": false
               }
             }
@@ -2921,10 +2587,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": [
-                "active",
-                "archived"
-              ]
+              "enum": ["active", "archived"]
             }
           },
           {
@@ -2954,16 +2617,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -3020,16 +2678,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -3089,16 +2742,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -3187,16 +2835,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -3258,16 +2901,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -3308,12 +2946,7 @@
                   },
                   "interval": {
                     "type": "string",
-                    "enum": [
-                      "day",
-                      "week",
-                      "month",
-                      "year"
-                    ]
+                    "enum": ["day", "week", "month", "year"]
                   },
                   "intervalCount": {
                     "type": "integer",
@@ -3323,18 +2956,12 @@
                   },
                   "usageType": {
                     "type": "string",
-                    "enum": [
-                      "licensed",
-                      "metered"
-                    ],
+                    "enum": ["licensed", "metered"],
                     "default": "licensed"
                   },
                   "billingScheme": {
                     "type": "string",
-                    "enum": [
-                      "per_unit",
-                      "tiered"
-                    ],
+                    "enum": ["per_unit", "tiered"],
                     "default": "per_unit"
                   },
                   "trialPeriodDays": {
@@ -3347,10 +2974,7 @@
                     "additionalProperties": {}
                   }
                 },
-                "required": [
-                  "unitAmountInKobo",
-                  "interval"
-                ],
+                "required": ["unitAmountInKobo", "interval"],
                 "additionalProperties": false
               }
             }
@@ -3416,16 +3040,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -3482,16 +3101,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -3572,16 +3186,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -3646,16 +3255,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -3709,16 +3313,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -3765,11 +3364,7 @@
                     "format": "uri"
                   }
                 },
-                "required": [
-                  "customerRef",
-                  "amountInKobo",
-                  "callbackUrl"
-                ],
+                "required": ["customerRef", "amountInKobo", "callbackUrl"],
                 "additionalProperties": false
               }
             }
@@ -3802,16 +3397,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -3857,9 +3447,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "customerRef"
-                ],
+                "required": ["customerRef"],
                 "additionalProperties": false
               }
             }
@@ -3892,16 +3480,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -3961,16 +3544,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -4043,16 +3621,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -4117,16 +3690,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -4180,16 +3748,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -4328,16 +3891,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -4392,16 +3950,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -4446,10 +3999,7 @@
                   },
                   "collectionMethod": {
                     "type": "string",
-                    "enum": [
-                      "charge_automatically",
-                      "send_invoice"
-                    ],
+                    "enum": ["charge_automatically", "send_invoice"],
                     "default": "charge_automatically"
                   },
                   "trialDays": {
@@ -4466,10 +4016,7 @@
                     "additionalProperties": {}
                   }
                 },
-                "required": [
-                  "customerId",
-                  "priceId"
-                ],
+                "required": ["customerId", "priceId"],
                 "additionalProperties": false
               }
             }
@@ -4536,16 +4083,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -4602,16 +4144,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -4671,16 +4208,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -4754,16 +4286,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -4828,16 +4355,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -4917,16 +4439,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -5000,16 +4517,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -5045,10 +4557,7 @@
                 "properties": {
                   "mode": {
                     "type": "string",
-                    "enum": [
-                      "now",
-                      "at_period_end"
-                    ],
+                    "enum": ["now", "at_period_end"],
                     "default": "now"
                   },
                   "comment": {
@@ -5096,16 +4605,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -5186,16 +4690,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -5241,10 +4740,7 @@
                   },
                   "prorationBehavior": {
                     "type": "string",
-                    "enum": [
-                      "create_prorations",
-                      "none"
-                    ],
+                    "enum": ["create_prorations", "none"],
                     "default": "create_prorations"
                   }
                 },
@@ -5280,16 +4776,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -5351,16 +4842,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -5403,15 +4889,11 @@
                   },
                   "effectiveAt": {
                     "type": "string",
-                    "enum": [
-                      "next_cycle"
-                    ],
+                    "enum": ["next_cycle"],
                     "default": "next_cycle"
                   }
                 },
-                "required": [
-                  "priceId"
-                ],
+                "required": ["priceId"],
                 "additionalProperties": false
               }
             }
@@ -5442,16 +4924,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -5511,16 +4988,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -5582,16 +5054,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -5630,9 +5097,7 @@
                     "minLength": 1
                   }
                 },
-                "required": [
-                  "coupon"
-                ],
+                "required": ["coupon"],
                 "additionalProperties": false
               }
             }
@@ -5671,16 +5136,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -5735,16 +5195,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -5798,16 +5253,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -5872,16 +5322,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -5954,16 +5399,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -6023,13 +5463,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": [
-                "draft",
-                "open",
-                "paid",
-                "void",
-                "uncollectible"
-              ]
+              "enum": ["draft", "open", "paid", "void", "uncollectible"]
             }
           },
           {
@@ -6059,16 +5493,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -6133,16 +5562,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -6213,16 +5637,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -6273,11 +5692,7 @@
                   },
                   "duration": {
                     "type": "string",
-                    "enum": [
-                      "once",
-                      "repeating",
-                      "forever"
-                    ]
+                    "enum": ["once", "repeating", "forever"]
                   },
                   "durationInCycles": {
                     "type": "integer",
@@ -6298,10 +5713,7 @@
                     "additionalProperties": {}
                   }
                 },
-                "required": [
-                  "code",
-                  "duration"
-                ],
+                "required": ["code", "duration"],
                 "additionalProperties": false
               }
             }
@@ -6343,16 +5755,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -6409,16 +5816,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -6478,16 +5880,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -6558,16 +5955,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -6619,16 +6011,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -6667,10 +6054,7 @@
                   },
                   "prorationCreditPolicy": {
                     "type": "string",
-                    "enum": [
-                      "credit_next_cycle",
-                      "none"
-                    ]
+                    "enum": ["credit_next_cycle", "none"]
                   },
                   "dunningMaxAttempts": {
                     "type": "integer",
@@ -6714,10 +6098,7 @@
                   },
                   "defaultCollectionMethod": {
                     "type": "string",
-                    "enum": [
-                      "charge_automatically",
-                      "send_invoice"
-                    ]
+                    "enum": ["charge_automatically", "send_invoice"]
                   },
                   "commsEnabled": {
                     "type": "boolean"
@@ -6755,16 +6136,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -6809,14 +6185,10 @@
                       "minLength": 1
                     },
                     "minItems": 1,
-                    "default": [
-                      "*"
-                    ]
+                    "default": ["*"]
                   }
                 },
-                "required": [
-                  "url"
-                ],
+                "required": ["url"],
                 "additionalProperties": false
               }
             }
@@ -6838,16 +6210,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -6904,16 +6271,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -6973,16 +6335,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -7070,16 +6427,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -7142,16 +6494,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -7222,12 +6569,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": [
-                "pending",
-                "succeeded",
-                "failed",
-                "dead"
-              ]
+              "enum": ["pending", "succeeded", "failed", "dead"]
             }
           },
           {
@@ -7256,16 +6598,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -7330,16 +6667,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -7409,16 +6741,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -7463,16 +6790,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -7547,16 +6869,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -7613,16 +6930,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -7667,16 +6979,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -7731,16 +7038,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -7789,11 +7091,7 @@
                     "minLength": 1
                   }
                 },
-                "required": [
-                  "amountInKobo",
-                  "bankCode",
-                  "accountNumber"
-                ],
+                "required": ["amountInKobo", "bankCode", "accountNumber"],
                 "additionalProperties": false
               }
             }
@@ -7835,13 +7133,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": [
-                "pending",
-                "settled",
-                "reconciled",
-                "failed",
-                "refunded"
-              ]
+              "enum": ["pending", "settled", "reconciled", "failed", "refunded"]
             }
           }
         ],
@@ -7852,16 +7144,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -7918,16 +7205,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -7989,16 +7271,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -8062,16 +7339,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -8123,16 +7395,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -8172,10 +7439,7 @@
                   },
                   "settlementMode": {
                     "type": "string",
-                    "enum": [
-                      "split_at_collection",
-                      "collect_then_payout"
-                    ]
+                    "enum": ["split_at_collection", "collect_then_payout"]
                   },
                   "branding": {
                     "type": "object",
@@ -8242,16 +7506,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -8305,16 +7564,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -8350,10 +7604,7 @@
                 "properties": {
                   "kind": {
                     "type": "string",
-                    "enum": [
-                      "standard",
-                      "priority"
-                    ],
+                    "enum": ["standard", "priority"],
                     "default": "standard"
                   },
                   "amountInKobo": {
@@ -8362,9 +7613,7 @@
                     "minimum": 0
                   }
                 },
-                "required": [
-                  "amountInKobo"
-                ],
+                "required": ["amountInKobo"],
                 "additionalProperties": false
               }
             }
@@ -8385,10 +7634,7 @@
             "required": false,
             "schema": {
               "type": "string",
-              "enum": [
-                "standard",
-                "priority"
-              ]
+              "enum": ["standard", "priority"]
             }
           },
           {
@@ -8418,16 +7664,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -8484,16 +7725,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -8547,16 +7783,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -8608,16 +7839,11 @@
                   },
                   "kind": {
                     "type": "string",
-                    "enum": [
-                      "card",
-                      "mandate"
-                    ],
+                    "enum": ["card", "mandate"],
                     "default": "card"
                   }
                 },
-                "required": [
-                  "customerId"
-                ],
+                "required": ["customerId"],
                 "additionalProperties": false
               }
             }
@@ -8658,16 +7884,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -8722,16 +7943,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"
@@ -8775,9 +7991,7 @@
                     "additionalProperties": {}
                   }
                 },
-                "required": [
-                  "type"
-                ],
+                "required": ["type"],
                 "additionalProperties": false
               }
             }
@@ -8801,16 +8015,11 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "success",
-                    "data"
-                  ],
+                  "required": ["success", "data"],
                   "properties": {
                     "success": {
                       "type": "boolean",
-                      "enum": [
-                        true
-                      ]
+                      "enum": [true]
                     },
                     "statusCode": {
                       "type": "integer"

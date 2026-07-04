@@ -17,7 +17,8 @@ const last = (mock: ReturnType<typeof mockFetch>) => mock.calls[mock.calls.lengt
 describe('plans + nested prices', () => {
   it('covers create/retrieve/update/list/archive and nested prices', async () => {
     const { mock, client } = setup();
-    for (let i = 0; i < 7; i++) i < 4 || i === 6 ? mock.ok({}) : mock.page([], { hasMore: false, nextCursor: null });
+    for (let i = 0; i < 7; i++)
+      i < 4 || i === 6 ? mock.ok({}) : mock.page([], { hasMore: false, nextCursor: null });
 
     await client.plans.create({ name: 'Pro' });
     expect(last(mock).method).toBe('POST');

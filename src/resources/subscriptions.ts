@@ -6,13 +6,7 @@ import type { PagePromise } from '../pagination.js';
 import type { Discount, DomainEvent, InvoiceLineItem } from './shared.js';
 
 export type SubscriptionStatus =
-  | 'incomplete'
-  | 'incomplete_expired'
-  | 'trialing'
-  | 'active'
-  | 'past_due'
-  | 'paused'
-  | 'canceled';
+  'incomplete' | 'incomplete_expired' | 'trialing' | 'active' | 'past_due' | 'paused' | 'canceled';
 
 export interface SubscriptionItem {
   id: string;
@@ -91,12 +85,7 @@ export interface SubscriptionScheduleObject {
 }
 
 export type DunningAttemptStatus =
-  | 'scheduled'
-  | 'attempting'
-  | 'succeeded'
-  | 'rescheduled'
-  | 'card_update_required'
-  | 'exhausted';
+  'scheduled' | 'attempting' | 'succeeded' | 'rescheduled' | 'card_update_required' | 'exhausted';
 
 /** One retry in a recovery run. */
 export interface DunningAttempt {
@@ -250,7 +239,10 @@ export class SubscriptionSchedules extends APIResource {
    *
    * @throws {NotFoundError} 404 `SUBSCRIPTION_SCHEDULE_NOT_FOUND`
    */
-  retrieve(subscriptionId: string, options?: RequestOptions): APIPromise<SubscriptionScheduleObject> {
+  retrieve(
+    subscriptionId: string,
+    options?: RequestOptions
+  ): APIPromise<SubscriptionScheduleObject> {
     return this._client.request<SubscriptionScheduleObject>({
       method: 'get',
       path: `/subscriptions/${seg(subscriptionId)}/schedule`,

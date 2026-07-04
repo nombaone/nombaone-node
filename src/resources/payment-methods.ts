@@ -6,11 +6,7 @@ import type { PagePromise } from '../pagination.js';
 
 export type PaymentMethodKind = 'card' | 'mandate' | 'virtual_account';
 export type PaymentMethodStatus =
-  | 'setup_pending'
-  | 'consent_pending'
-  | 'active'
-  | 'removed'
-  | 'expired';
+  'setup_pending' | 'consent_pending' | 'active' | 'removed' | 'expired';
 
 /**
  * How a customer pays. Card and mandate are **pull** rails (the engine

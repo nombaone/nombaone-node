@@ -26,10 +26,7 @@ interface RefData {
 export type CustomerCreatedEvent = WebhookEventBase<'customer.created', RefData>;
 export type CustomerUpdatedEvent = WebhookEventBase<'customer.updated', RefData>;
 
-export type CouponCreatedEvent = WebhookEventBase<
-  'coupon.created',
-  RefData & { code: string }
->;
+export type CouponCreatedEvent = WebhookEventBase<'coupon.created', RefData & { code: string }>;
 
 export type DiscountCreatedEvent = WebhookEventBase<'discount.created', RefData>;
 export type DiscountRemovedEvent = WebhookEventBase<'discount.removed', RefData>;

@@ -59,9 +59,9 @@ describe('webhooks.verifySignature', () => {
   it('rejects a stale timestamp beyond the 300s default tolerance', () => {
     const payload = eventBody();
     const stale = Math.floor(Date.now() / 1000) - 301;
-    expect(() => webhooks.verifySignature(payload, sign(payload, SECRET, stale), SECRET)).toThrowError(
-      /tolerance/
-    );
+    expect(() =>
+      webhooks.verifySignature(payload, sign(payload, SECRET, stale), SECRET)
+    ).toThrowError(/tolerance/);
   });
 
   it('accepts a timestamp just inside tolerance, and honors a custom tolerance', () => {

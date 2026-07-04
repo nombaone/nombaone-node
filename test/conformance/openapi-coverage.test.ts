@@ -126,7 +126,8 @@ const EXERCISES: Exercise[] = [
   (c) => c.coupons.update(ID, { maxRedemptions: 5 }),
   (c) => c.coupons.list(),
   // payment methods
-  (c) => c.paymentMethods.setup({ customerRef: ID, amountInKobo: 100, callbackUrl: 'https://x.co' }),
+  (c) =>
+    c.paymentMethods.setup({ customerRef: ID, amountInKobo: 100, callbackUrl: 'https://x.co' }),
   (c) => c.paymentMethods.createVirtualAccount({ customerRef: ID }),
   (c) => c.paymentMethods.retrieve(ID),
   (c) => c.paymentMethods.list(),
@@ -183,7 +184,9 @@ describe('OpenAPI conformance', () => {
   it('every SDK call matches a spec operation, and every spec operation is covered', async () => {
     const recorded: Array<{ method: string; path: string }> = [];
     const universalFetch = (async (input: string | URL | Request, init?: RequestInit) => {
-      const url = new URL(typeof input === 'string' ? input : input instanceof URL ? input.href : input.url);
+      const url = new URL(
+        typeof input === 'string' ? input : input instanceof URL ? input.href : input.url
+      );
       recorded.push({ method: (init?.method ?? 'GET').toLowerCase(), path: url.pathname });
       return new Response(
         JSON.stringify({

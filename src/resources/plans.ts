@@ -75,11 +75,7 @@ export class PlanPrices extends APIResource {
   }
 
   /** List a plan's prices, newest first. */
-  list(
-    planId: string,
-    params?: PlanPriceListParams,
-    options?: RequestOptions
-  ): PagePromise<Price> {
+  list(planId: string, params?: PlanPriceListParams, options?: RequestOptions): PagePromise<Price> {
     return this._client.requestPage<Price>({
       method: 'get',
       path: `/plans/${seg(planId)}/prices`,

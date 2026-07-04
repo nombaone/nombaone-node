@@ -160,7 +160,7 @@ export class Webhooks {
     const matched = signatures.some((candidate) => constantTimeEquals(candidate, expected));
     if (!matched) {
       throw new WebhookVerificationError(
-        'Webhook signature verification failed — check you are using this endpoint\'s current signing secret and the exact raw request body (no re-serialization).'
+        "Webhook signature verification failed — check you are using this endpoint's current signing secret and the exact raw request body (no re-serialization)."
       );
     }
   }
