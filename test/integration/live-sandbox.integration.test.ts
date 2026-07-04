@@ -19,6 +19,12 @@ import {
 
 const enabled = process.env.NOMBAONE_INTEGRATION === '1';
 const baseUrl = process.env.NOMBAONE_BASE_URL ?? 'http://localhost:8000';
+/**
+ * The webhook round-trip registers a listener on 127.0.0.1 — only a LOCAL
+ * API can call back into it. Against a deployed sandbox, expose your
+ * listener through a tunnel and register that URL instead.
+ */
+const localTarget = /localhost|127\.0\.0\.1/.test(baseUrl);
 
 const unique = `sdk-it-${Date.now()}-${Math.floor(Math.random() * 1e6)}`;
 
@@ -29,8 +35,6 @@ describe.skipIf(!enabled)('live sandbox integration', () => {
     nombaone = new Nombaone(process.env.NOMBAONE_API_KEY, { baseUrl });
   });
 
-  let customerId: string;
-  let priceId: string;
   let subscriptionId: string;
 
   it('runs the full first-subscription lifecycle', async () => {
@@ -40,7 +44,6 @@ describe.skipIf(!enabled)('live sandbox integration', () => {
     });
     expect(customer.id).toMatch(/^nbo\d{12}cus$/);
     expect(customer.mode).toBe('sandbox');
-    customerId = customer.id;
 
     const plan = await nombaone.plans.create({ name: `SDK IT ${unique}` });
     expect(plan.status).toBe('active');
@@ -51,7 +54,6 @@ describe.skipIf(!enabled)('live sandbox integration', () => {
     });
     expect(price.unitAmountInKobo).toBe(250_000);
     expect(price.currency).toBe('NGN');
-    priceId = price.id;
 
     const method = await nombaone.sandbox.createPaymentMethod({
       customerId: customer.id,
@@ -133,7 +135,7 @@ describe.skipIf(!enabled)('live sandbox integration', () => {
     expect(canceled.cancellationReason).toBe('voluntary');
   }, 30_000);
 
-  describe('webhook round-trip', () => {
+  describe.skipIf(!localTarget)('webhook round-trip', () => {
     let server: Server;
     let received: Array<{ body: string; headers: Record<string, string> }>;
     let listenerUrl: string;
