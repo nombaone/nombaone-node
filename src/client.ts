@@ -16,6 +16,7 @@ import { Sandbox } from './resources/sandbox.js';
 import { Settlements } from './resources/settlements.js';
 import { Subscriptions } from './resources/subscriptions.js';
 import { WebhookEndpoints } from './resources/webhook-endpoints.js';
+import { Webhooks } from './webhooks.js';
 
 import type { Mode, RequestSpec, TransportResult } from './core-types.js';
 
@@ -108,6 +109,8 @@ export class Nombaone {
   readonly metrics: Metrics = new Metrics(this);
   /** Sandbox-only simulation instruments (test clock, test methods, webhook simulate). */
   readonly sandbox: Sandbox = new Sandbox(this);
+  /** Verify + parse incoming webhook deliveries (crypto helper, no API calls). */
+  readonly webhooks: Webhooks = new Webhooks();
 
   constructor(apiKey?: string | NombaoneOptions, options: NombaoneOptions = {}) {
     const opts: NombaoneOptions =

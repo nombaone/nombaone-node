@@ -29,6 +29,45 @@ export type {
   RequestOptions,
 } from './core-types.js';
 export { VERSION } from './version.js';
+export { Webhooks, webhooks } from './webhooks.js';
+export type { WebhookVerifyOptions } from './webhooks.js';
+export type {
+  WebhookEvent,
+  WebhookEventBase,
+  WebhookEventType,
+  CustomerCreatedEvent,
+  CustomerUpdatedEvent,
+  CouponCreatedEvent,
+  DiscountCreatedEvent,
+  DiscountRemovedEvent,
+  PlanCreatedEvent,
+  PlanUpdatedEvent,
+  PlanArchivedEvent,
+  PriceCreatedEvent,
+  PriceDeactivatedEvent,
+  SubscriptionCreatedEvent,
+  SubscriptionUpdatedEvent,
+  SubscriptionTrialWillEndEvent,
+  SubscriptionActivatedEvent,
+  SubscriptionPausedEvent,
+  SubscriptionResumedEvent,
+  SubscriptionCanceledEvent,
+  SubscriptionChurnedEvent,
+  InvoiceCreatedEvent,
+  InvoiceFinalizedEvent,
+  InvoicePaidEvent,
+  InvoicePaymentFailedEvent,
+  InvoicePaymentPartiallyCollectedEvent,
+  InvoicePaymentRecoveredEvent,
+  InvoiceActionRequiredEvent,
+  InvoiceVoidedEvent,
+  PaymentMethodAttachedEvent,
+  PaymentMethodUpdatedEvent,
+  PaymentMethodExpiringEvent,
+  SettlementCreatedEvent,
+  SettlementRefundedEvent,
+  SettlementPayoutCreatedEvent,
+} from './webhook-events.js';
 
 // Resources
 export { Customers } from './resources/customers.js';
