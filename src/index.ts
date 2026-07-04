@@ -94,6 +94,60 @@ export type {
   CouponListParams,
   CouponUpdateParams,
 } from './resources/coupons.js';
+export { PaymentMethods } from './resources/payment-methods.js';
+export type {
+  CheckoutSetup,
+  PaymentMethod,
+  PaymentMethodKind,
+  PaymentMethodListParams,
+  PaymentMethodSetupParams,
+  PaymentMethodStatus,
+  PaymentMethodVirtualAccountParams,
+  VirtualAccount,
+} from './resources/payment-methods.js';
+export { Mandates } from './resources/mandates.js';
+export type { MandateCreateParams, MandateFrequency, MandateSetup } from './resources/mandates.js';
+export { Settlements } from './resources/settlements.js';
+export type {
+  Escrow,
+  Payout,
+  PayoutCreateParams,
+  Refund,
+  Settlement,
+  SettlementListParams,
+  SettlementRefundParams,
+  SettlementStatus,
+} from './resources/settlements.js';
+export { WebhookEndpoints, WebhookEndpointDeliveries } from './resources/webhook-endpoints.js';
+export type {
+  RotatedWebhookSecret,
+  WebhookDelivery,
+  WebhookDeliveryListParams,
+  WebhookDeliveryStatus,
+  WebhookEndpoint,
+  WebhookEndpointCreateParams,
+  WebhookEndpointUpdateParams,
+  WebhookEndpointWithSecret,
+} from './resources/webhook-endpoints.js';
+export { Events } from './resources/events.js';
+export type { EventCatalogEntry, EventListParams } from './resources/events.js';
+export { Organization, OrganizationBilling } from './resources/organization.js';
+export type {
+  BillingSettings,
+  BillingSettingsUpdateParams,
+  TenantSettings,
+  TenantSettingsUpdateParams,
+} from './resources/organization.js';
+export { Metrics } from './resources/metrics.js';
+export type { BillingMetrics, BillingMetricsParams, DunningFunnel } from './resources/metrics.js';
+export { Sandbox } from './resources/sandbox.js';
+export type {
+  AdvanceCycleResult,
+  SandboxPaymentMethodBehavior,
+  SandboxPaymentMethodParams,
+  SandboxSimulateWebhookParams,
+  WebhookSimulation,
+} from './resources/sandbox.js';
 
 import { Nombaone } from './client.js';
 export default Nombaone;

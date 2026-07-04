@@ -4,10 +4,18 @@ import { Page, PagePromise } from './pagination.js';
 import { performRequest, type TransportConfig } from './internal/http.js';
 import { Coupons } from './resources/coupons.js';
 import { Customers } from './resources/customers.js';
+import { Events } from './resources/events.js';
 import { Invoices } from './resources/invoices.js';
+import { Mandates } from './resources/mandates.js';
+import { Metrics } from './resources/metrics.js';
+import { Organization } from './resources/organization.js';
+import { PaymentMethods } from './resources/payment-methods.js';
 import { Plans } from './resources/plans.js';
 import { Prices } from './resources/prices.js';
+import { Sandbox } from './resources/sandbox.js';
+import { Settlements } from './resources/settlements.js';
 import { Subscriptions } from './resources/subscriptions.js';
+import { WebhookEndpoints } from './resources/webhook-endpoints.js';
 
 import type { Mode, RequestSpec, TransportResult } from './core-types.js';
 
@@ -84,6 +92,22 @@ export class Nombaone {
   readonly invoices: Invoices = new Invoices(this);
   /** Coupons — reusable discount rules. */
   readonly coupons: Coupons = new Coupons(this);
+  /** Payment methods — cards, mandates, virtual accounts. */
+  readonly paymentMethods: PaymentMethods = new PaymentMethods(this);
+  /** Direct-debit mandates (async NIBSS consent). */
+  readonly mandates: Mandates = new Mandates(this);
+  /** Settlements, refunds, payouts, escrow. */
+  readonly settlements: Settlements = new Settlements(this);
+  /** Webhook endpoint management (REST). To verify deliveries, see `webhooks`. */
+  readonly webhookEndpoints: WebhookEndpoints = new WebhookEndpoints(this);
+  /** The domain-event log — your reconciliation backstop. */
+  readonly events: Events = new Events(this);
+  /** Organization settings + billing/dunning policy. */
+  readonly organization: Organization = new Organization(this);
+  /** Billing KPIs computed from the ledger. */
+  readonly metrics: Metrics = new Metrics(this);
+  /** Sandbox-only simulation instruments (test clock, test methods, webhook simulate). */
+  readonly sandbox: Sandbox = new Sandbox(this);
 
   constructor(apiKey?: string | NombaoneOptions, options: NombaoneOptions = {}) {
     const opts: NombaoneOptions =
