@@ -1,5 +1,5 @@
 {
-  "name": "@nombaone/node",
+  "name": "nombaone",
   "version": "0.1.0",
   "description": "Official Node.js SDK for the NombaOne subscription-billing API",
   "keywords": [
@@ -57,13 +57,10 @@
     "lint": "prettier --check .",
     "format": "prettier --write .",
     "check:package": "publint && attw --pack .",
-    "openapi:update": "node scripts/update-openapi.mjs",
-    "version": "changeset version && node scripts/sync-version.mjs && prettier --write package.json src/version.ts",
-    "release": "pnpm build && changeset publish"
+    "openapi:update": "node scripts/update-openapi.mjs"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.2",
-    "@changesets/cli": "^2.29.0",
     "@types/node": "^22.15.0",
     "prettier": "^3.5.0",
     "publint": "^0.3.12",

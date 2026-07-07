@@ -63,7 +63,7 @@ const deriveMode = (apiKey: string): Mode | null => {
  *
  * @example
  * ```ts
- * import Nombaone from '@nombaone/node';
+ * import Nombaone from 'nombaone';
  *
  * const nombaone = new Nombaone(process.env.NOMBAONE_API_KEY);
  *

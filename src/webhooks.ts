@@ -49,7 +49,7 @@ const parseSignatureHeader = (header: string): { timestamp: string; signatures: 
  * Verify and parse NombaOne webhook deliveries.
  *
  * Available as `nombaone.webhooks` on a client, or standalone via
- * `import { webhooks } from '@nombaone/node'` — verification needs only the
+ * `import { webhooks } from 'nombaone'` — verification needs only the
  * endpoint's signing secret, never an API key.
  *
  * **Feed it the raw request body.** `JSON.parse` + `JSON.stringify` can

@@ -1,36 +1,77 @@
 name: Release
 
+# Publishing is automated and merge-triggered: every push to `main` runs the
+# full test gate, builds, and publishes to npm. It publishes ONLY when the
+# version in package.json is new — pushes that don't change the version are a
+# no-op (the upload is skipped). So the only action needed to release is
+# bumping `"version": "…"` in a merged PR.
+#
+# Auth: npm Trusted Publishing (OIDC — no token) once the publisher is
+# configured on npmjs.com. For the very first publish of the package (before
+# a trusted publisher can be attached), set the NPM_TOKEN secret; the step
+# below only writes it when it is actually present, so an empty secret can
+# never clobber the OIDC credential.
 on:
   push:
     branches: [main]
 
-concurrency: release-${{ github.ref }}
-
 permissions:
-  contents: write
-  pull-requests: write
-  id-token: write
+  contents: read
+  id-token: write # lets GitHub authenticate to npm (OIDC) — no API token needed
+
+concurrency:
+  group: release
+  cancel-in-progress: false # never interrupt an in-flight publish
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: pnpm
-          registry-url: https://registry.npmjs.org
-      - run: pnpm install --frozen-lockfile
-      - name: Create release PR or publish
-        uses: changesets/action@v1
-        with:
-          version: pnpm version
-          publish: pnpm release
+
+      # Trusted Publishing needs a recent npm CLI.
+      - name: Update npm (OIDC trusted publishing support)
+        run: npm install -g npm@latest && npm --version
+
+      - name: Install + full quality gate (never ship red)
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm lint
+          pnpm typecheck
+          pnpm test
+
+      - name: Build
+        run: pnpm build
+
+      - name: Validate package (exports map, types, publint)
+        run: pnpm check:package
+
+      - name: Check whether this version is already on npm
+        id: guard
+        run: |
+          VERSION="$(jq -r .version package.json)"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          if npm view "nombaone@$VERSION" version >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "nombaone@$VERSION already exists on npm — skipping publish."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "nombaone@$VERSION is new — will publish."
+          fi
+
+      # First-publish fallback only: written ONLY when the secret is non-empty,
+      # so it can never interfere with OIDC once trusted publishing is set up.
+      - name: Configure token fallback (first publish only)
+        if: steps.guard.outputs.exists == 'false' && env.FALLBACK_NPM_TOKEN != ''
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_PROVENANCE: 'true'
+          FALLBACK_NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: echo "//registry.npmjs.org/:_authToken=${FALLBACK_NPM_TOKEN}" >> "$HOME/.npmrc"
+
+      - name: Publish to npm (skips if already published)
+        if: steps.guard.outputs.exists == 'false'
+        run: npm publish --provenance --access public

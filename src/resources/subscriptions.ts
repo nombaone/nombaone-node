@@ -3,6 +3,7 @@ import { APIResource, seg } from './resource.js';
 import type { APIPromise } from '../api-promise.js';
 import type { Kobo, Metadata, Mode, RequestOptions } from '../core-types.js';
 import type { PagePromise } from '../pagination.js';
+import type { PaymentMethod } from './payment-methods.js';
 import type { Discount, DomainEvent, InvoiceLineItem } from './shared.js';
 
 export type SubscriptionStatus =
@@ -483,13 +484,16 @@ export class Subscriptions extends APIResource {
    * Swap the payment method that bills this subscription — the card-update
    * path during dunning. Exactly one of `paymentMethodReference` or
    * `checkoutToken`.
+   *
+   * Returns the updated **PaymentMethod** (not the subscription) — that is
+   * what the wire actually carries, whatever the spec says.
    */
   updatePaymentMethod(
     id: string,
     params: SubscriptionUpdatePaymentMethodParams,
     options?: RequestOptions
-  ): APIPromise<Subscription> {
-    return this._client.request<Subscription>({
+  ): APIPromise<PaymentMethod> {
+    return this._client.request<PaymentMethod>({
       method: 'post',
       path: `/subscriptions/${seg(id)}/payment-method`,
       body: params,

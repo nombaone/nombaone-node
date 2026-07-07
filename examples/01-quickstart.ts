@@ -5,7 +5,7 @@
  *   NOMBAONE_API_KEY=nbo_sandbox_… pnpm exec tsx examples/01-quickstart.ts
  *
  * In your own app, import the published package instead:
- *   import Nombaone from '@nombaone/node';
+ *   import Nombaone from 'nombaone';
  */
 import Nombaone from '../src/index.js';
 
