@@ -17,10 +17,13 @@ release.
       <https://www.npmjs.com/org/create> named exactly **`nombaone`** (the free
       plan is fine — public packages only). The package name `@nombaone/node`
       lives inside this org, as will every future JS package we ship.
-- [ ] **Put the code on GitHub.** Create an empty repo named **`nombaone-node`**
-      under the `nombaone` org at <https://github.com/organizations/nombaone/repositories/new>
-      (don't add a README/license — the repo already has them), then push the
-      existing code to it.
+- [ ] **Put the code on GitHub.** The repo currently lives at
+      <https://github.com/emekaorji/nombaone-node>, and `package.json` →
+      `repository.url` points there. **These two must always match** — npm's
+      provenance check rejects the publish otherwise (it verifies the repo the
+      workflow actually ran in against the manifest). If you later transfer the
+      repo to the `nombaone` org, update `repository.url` in `package.json` and
+      the Trusted Publisher entry in the same change.
 - [ ] **First publish only — add a temporary token.** npm can only attach
       tokenless publishing to a package that already exists, so the very first
       version ships with a token. First, on npmjs.com go to _Access Tokens →
@@ -32,8 +35,9 @@ release.
       that run publishes `@nombaone/node@0.1.0`.
 - [ ] **Switch to tokenless publishing (Trusted Publishing).** On
       <https://www.npmjs.com/package/@nombaone/node/access>, under _Trusted Publisher_,
-      choose GitHub Actions and enter exactly: Organization or user `nombaone` ·
-      Repository `nombaone-node` · Workflow filename `release.yml`.
+      choose GitHub Actions and enter exactly: Organization or user `emekaorji` ·
+      Repository `nombaone-node` · Workflow filename `release.yml`. (If the repo
+      moves to the `nombaone` org later, update this entry to match.)
 - [ ] **Delete the token.** Remove the `NPM_TOKEN` secret from GitHub and revoke
       the token on npmjs.com. From now on publishing is tokenless — nothing to
       leak, nothing to rotate.

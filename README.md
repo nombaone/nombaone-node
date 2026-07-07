@@ -7,7 +7,7 @@ npm install @nombaone/node
 # or: pnpm add @nombaone/node · yarn add @nombaone/node
 ```
 
-Requires Node.js 20+. TypeScript-first, zero runtime dependencies, ESM and CJS.
+Requires Node.js 22+. TypeScript-first, zero runtime dependencies, ESM and CJS.
 
 ## Quickstart
 

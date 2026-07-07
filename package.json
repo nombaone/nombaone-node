@@ -15,7 +15,7 @@
   "homepage": "https://docs.nombaone.xyz",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nombaone/nombaone-node.git"
+    "url": "git+https://github.com/emekaorji/nombaone-node.git"
   },
   "license": "MIT",
   "type": "module",
@@ -42,7 +42,7 @@
     "CHANGELOG.md"
   ],
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "sideEffects": false,
   "publishConfig": {
