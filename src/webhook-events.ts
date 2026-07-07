@@ -97,7 +97,18 @@ export type ExampleCreatedEvent = WebhookEventBase<'example.created', RefData>;
 export type ExampleSettledEvent = WebhookEventBase<'example.settled', RefData>;
 
 /**
- * Every event the platform can deliver, discriminated on `type`.
+ * A delivery whose `type` is not in this SDK version's catalog — the platform
+ * added an event newer than your installed SDK. It still verifies and parses;
+ * cast to this to handle it before upgrading:
+ * `const raw = event as UnknownWebhookEvent`.
+ */
+export type UnknownWebhookEvent = WebhookEventBase<string, Record<string, unknown>>;
+
+/**
+ * Every event the platform can deliver, discriminated on `type` — narrowing
+ * on it narrows `data` with it. The union is closed so narrowing actually
+ * works; a genuinely new event type delivered before you upgrade lands in
+ * your `default` branch (see {@link UnknownWebhookEvent}).
  *
  * @example
  * ```ts
@@ -146,8 +157,7 @@ export type WebhookEvent =
   | SettlementRefundedEvent
   | SettlementPayoutCreatedEvent
   | ExampleCreatedEvent
-  | ExampleSettledEvent
-  // Open catalog: an event type added by the API tomorrow still parses today.
-  | WebhookEventBase<string & {}, Record<string, unknown>>;
+  | ExampleSettledEvent;
 
-export type WebhookEventType = WebhookEvent['type'];
+/** Known event type strings, kept open — future types never break compiles. */
+export type WebhookEventType = WebhookEvent['type'] | (string & {});

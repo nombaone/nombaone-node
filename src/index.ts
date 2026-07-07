@@ -32,6 +32,7 @@ export { VERSION } from './version.js';
 export { Webhooks, webhooks } from './webhooks.js';
 export type { WebhookVerifyOptions } from './webhooks.js';
 export type {
+  UnknownWebhookEvent,
   WebhookEvent,
   WebhookEventBase,
   WebhookEventType,
