@@ -192,4 +192,4 @@ Runnable scripts live in [`examples/`](examples) — quickstart, pagination, the
 
 ## Requirements & versioning
 
-Node.js ≥ 20 (built on global `fetch`). Semantic versioning; the API itself is versioned at `/v1` and additive changes never break you. MIT licensed.
+Node.js ≥ 22 (built on global `fetch`). Semantic versioning; the API itself is versioned at `/v1` and additive changes never break you. MIT licensed.
