@@ -1,4 +1,4 @@
-# Publishing `nombaone` to npm
+# Publishing `@nombaone/node` to npm
 
 Releases are **automated and merge-triggered**. You never build, test, tag, or
 upload by hand — a GitHub Actions workflow
@@ -11,10 +11,12 @@ release.
 
 ## One-time setup (~15 min, do these once ever)
 
-- [ ] **Confirm the name is free.** Open <https://www.npmjs.com/package/nombaone>.
-      If it says _404_, you're good. (Checked free on 2026-07-05.)
 - [ ] **Make an npm account** at <https://www.npmjs.com/signup> and turn on
       2-factor auth (Settings → Two-Factor Authentication — required to publish).
+- [ ] **Own the `@nombaone` scope.** Create the npm organization at
+      <https://www.npmjs.com/org/create> named exactly **`nombaone`** (the free
+      plan is fine — public packages only). The package name `@nombaone/node`
+      lives inside this org, as will every future JS package we ship.
 - [ ] **Put the code on GitHub.** Create an empty repo named **`nombaone-node`**
       under the `nombaone` org at <https://github.com/organizations/nombaone/repositories/new>
       (don't add a README/license — the repo already has them), then push the
@@ -27,9 +29,9 @@ release.
       _Settings → Secrets and variables → Actions → New repository secret_,
       name it exactly **`NPM_TOKEN`**, and paste the token.
 - [ ] **Merge to `main`** (or just push). Watch _Actions → Release_ go green —
-      that run publishes `nombaone@0.1.0`.
+      that run publishes `@nombaone/node@0.1.0`.
 - [ ] **Switch to tokenless publishing (Trusted Publishing).** On
-      <https://www.npmjs.com/package/nombaone/access>, under _Trusted Publisher_,
+      <https://www.npmjs.com/package/@nombaone/node/access>, under _Trusted Publisher_,
       choose GitHub Actions and enter exactly: Organization or user `nombaone` ·
       Repository `nombaone-node` · Workflow filename `release.yml`.
 - [ ] **Delete the token.** Remove the `NPM_TOKEN` secret from GitHub and revoke
@@ -46,7 +48,7 @@ release.
 
 That's the whole release. On merge, GitHub runs the full test gate, builds, and
 uploads the new version to npm automatically. Watch the **Release** run go green
-under _Actions_ (~2 min); within a minute of green, `npm install nombaone`
+under _Actions_ (~2 min); within a minute of green, `npm install @nombaone/node`
 serves it.
 
 Merges that don't change the version publish nothing — the workflow sees the
@@ -61,9 +63,9 @@ From any folder on any machine:
 
 ```bash
 mkdir /tmp/nombaone-check && cd /tmp/nombaone-check
-npm init -y >/dev/null && npm install nombaone
+npm init -y >/dev/null && npm install @nombaone/node
 NOMBAONE_API_KEY=nbo_sandbox_… node --input-type=module -e "
-import Nombaone from 'nombaone';
+import Nombaone from '@nombaone/node';
 const n = new Nombaone(process.env.NOMBAONE_API_KEY);
 const c = await n.customers.create({ email: 'check+' + Date.now() + '@example.com', name: 'Clean Room' });
 console.log('published package works:', c.id);

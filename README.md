@@ -1,10 +1,10 @@
-# nombaone (Node.js SDK)
+# @nombaone/node
 
 The official Node.js SDK for the [Nomba One](https://nombaone.xyz) subscription-billing API — recurring billing for Nigeria over card, direct debit, bank transfer, and more, with dunning that recovers and a ledger that never loses a kobo.
 
 ```bash
-npm install nombaone
-# or: pnpm add nombaone · yarn add nombaone
+npm install @nombaone/node
+# or: pnpm add @nombaone/node · yarn add @nombaone/node
 ```
 
 Requires Node.js 20+. TypeScript-first, zero runtime dependencies, ESM and CJS.
@@ -14,7 +14,7 @@ Requires Node.js 20+. TypeScript-first, zero runtime dependencies, ESM and CJS.
 Grab a sandbox key (`nbo_sandbox_…`) from the [dashboard](https://app.nombaone.xyz), set it as `NOMBAONE_API_KEY`, and you are three objects away from a live subscription:
 
 ```ts
-import Nombaone from 'nombaone';
+import Nombaone from '@nombaone/node';
 
 const nombaone = new Nombaone(process.env.NOMBAONE_API_KEY);
 
@@ -93,7 +93,7 @@ for await (const invoice of nombaone.invoices.list({ status: 'open' })) {
 Failures throw typed errors carrying everything the API said — the stable `code` to branch on, a `hint` telling you exactly what to do next, a `docUrl` into the error reference, per-field details on validation failures, and the `requestId` to quote to support:
 
 ```ts
-import { NotFoundError, RateLimitError, ValidationError } from 'nombaone';
+import { NotFoundError, RateLimitError, ValidationError } from '@nombaone/node';
 
 try {
   await nombaone.subscriptions.create({ customerId, priceId });
@@ -135,7 +135,7 @@ Verify before you parse, and dedupe on the event id — delivery is at-least-onc
 
 ```ts
 import express from 'express';
-import { webhooks } from 'nombaone'; // no API key needed to verify
+import { webhooks } from '@nombaone/node'; // no API key needed to verify
 
 const app = express();
 app.post('/nombaone/webhooks', express.raw({ type: 'application/json' }), (req, res) => {

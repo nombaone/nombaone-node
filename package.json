@@ -1,5 +1,5 @@
 {
-  "name": "nombaone",
+  "name": "@nombaone/node",
   "version": "0.1.0",
   "description": "Official Node.js SDK for the NombaOne subscription-billing API",
   "keywords": [

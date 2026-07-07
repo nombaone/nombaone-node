@@ -56,12 +56,12 @@ jobs:
         run: |
           VERSION="$(jq -r .version package.json)"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-          if npm view "nombaone@$VERSION" version >/dev/null 2>&1; then
+          if npm view "@nombaone/node@$VERSION" version >/dev/null 2>&1; then
             echo "exists=true" >> "$GITHUB_OUTPUT"
-            echo "nombaone@$VERSION already exists on npm — skipping publish."
+            echo "@nombaone/node@$VERSION already exists on npm — skipping publish."
           else
             echo "exists=false" >> "$GITHUB_OUTPUT"
-            echo "nombaone@$VERSION is new — will publish."
+            echo "@nombaone/node@$VERSION is new — will publish."
           fi
 
       # First-publish fallback only: written ONLY when the secret is non-empty,

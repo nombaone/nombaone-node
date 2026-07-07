@@ -1,4 +1,4 @@
-# nombaone
+# @nombaone/node
 
 ## 0.1.0
 
