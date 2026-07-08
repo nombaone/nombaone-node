@@ -11,7 +11,7 @@ Requires Node.js 22+. TypeScript-first, zero runtime dependencies, ESM and CJS.
 
 ## Quickstart
 
-Grab a sandbox key (`nbo_sandbox_…`) from the [dashboard](https://app.nombaone.xyz), set it as `NOMBAONE_API_KEY`, and you are three objects away from a live subscription:
+Grab a sandbox key (`nbo_sandbox_…`) from the [dashboard](https://console.nombaone.xyz), set it as `NOMBAONE_API_KEY`, and you are three objects away from a live subscription:
 
 ```ts
 import Nombaone from '@nombaone/node';
