@@ -74,8 +74,10 @@ describe.skipIf(!enabled)('live sandbox integration', () => {
   it('advances a billing cycle through the real engine (test clock)', async () => {
     const result = await nombaone.sandbox.advanceCycle(subscriptionId);
     expect(result.subscriptionId).toBe(subscriptionId);
-    expect(result.invoice).toBeTruthy();
-    expect(result.invoice.totalInKobo).toBeGreaterThan(0);
+    // This subscription is not cancel-at-period-end, so the cycle must bill.
+    const invoice = result.invoice;
+    if (!invoice) throw new Error('expected the cycle to produce an invoice');
+    expect(invoice.totalInKobo).toBeGreaterThan(0);
     expect(['paid', 'past_due', 'pending', 'open']).toContain(result.outcome);
   }, 60_000);
 

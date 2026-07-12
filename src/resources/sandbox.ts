@@ -30,10 +30,14 @@ export interface SandboxPaymentMethodParams {
 export interface AdvanceCycleResult {
   domain: 'advance_cycle_result';
   subscriptionId: string;
-  /** The cycle's billing outcome: `paid` | `past_due` | `pending` | `open`. */
+  /** The cycle's billing outcome: `paid` | `past_due` | `pending` | `open` | `canceled`. */
   outcome: string;
-  /** The invoice the cycle produced (or the existing one if already billed). */
-  invoice: Invoice;
+  /**
+   * The invoice the cycle produced (or the existing one if already billed). `null`
+   * when the outcome is `canceled`: a subscription flagged cancel-at-period-end ends
+   * at the boundary instead of renewing, so nothing is billed.
+   */
+  invoice: Invoice | null;
 }
 
 export interface SandboxSimulateWebhookParams {

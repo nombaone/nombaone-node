@@ -8,7 +8,7 @@
   "servers": [
     {
       "url": "http://localhost:8000/v1",
-      "description": "test mode (test-environment API keys)"
+      "description": "One base URL for both modes — the API key prefix (nbo_sandbox_ / nbo_live_) selects sandbox vs live."
     }
   ],
   "components": {
@@ -69,6 +69,7 @@
                   "API_KEY_INVALID",
                   "API_KEY_SCOPE_FORBIDDEN",
                   "API_KEY_ENVIRONMENT_MISMATCH",
+                  "API_KEY_HOST_MISMATCH",
                   "IDEMPOTENCY_KEY_MISSING",
                   "IDEMPOTENCY_KEY_REUSED",
                   "IDEMPOTENCY_IN_PROGRESS",
@@ -184,7 +185,7 @@
           },
           "mode": {
             "type": "string",
-            "enum": ["test", "live"]
+            "enum": ["sandbox", "live"]
           },
           "createdAt": {
             "type": "string",
@@ -234,7 +235,7 @@
           },
           "mode": {
             "type": "string",
-            "enum": ["test", "live"]
+            "enum": ["sandbox", "live"]
           },
           "createdAt": {
             "type": "string",
@@ -279,7 +280,7 @@
           },
           "interval": {
             "type": "string",
-            "enum": ["day", "week", "month", "year"]
+            "enum": ["day", "week", "month", "year", "minute"]
           },
           "intervalCount": {
             "type": "integer"
@@ -304,7 +305,7 @@
           },
           "mode": {
             "type": "string",
-            "enum": ["test", "live"]
+            "enum": ["sandbox", "live"]
           },
           "createdAt": {
             "type": "string",
@@ -436,7 +437,7 @@
           },
           "mode": {
             "type": "string",
-            "enum": ["test", "live"]
+            "enum": ["sandbox", "live"]
           },
           "createdAt": {
             "type": "string",
@@ -577,7 +578,7 @@
           },
           "mode": {
             "type": "string",
-            "enum": ["test", "live"]
+            "enum": ["sandbox", "live"]
           },
           "createdAt": {
             "type": "string",
@@ -653,7 +654,7 @@
           },
           "mode": {
             "type": "string",
-            "enum": ["test", "live"]
+            "enum": ["sandbox", "live"]
           },
           "createdAt": {
             "type": "string",
@@ -715,7 +716,7 @@
           },
           "mode": {
             "type": "string",
-            "enum": ["test", "live"]
+            "enum": ["sandbox", "live"]
           },
           "createdAt": {
             "type": "string",
@@ -765,7 +766,7 @@
           },
           "mode": {
             "type": "string",
-            "enum": ["test", "live"]
+            "enum": ["sandbox", "live"]
           },
           "voidedAt": {
             "type": "string",
@@ -854,7 +855,7 @@
           },
           "mode": {
             "type": "string",
-            "enum": ["test", "live"]
+            "enum": ["sandbox", "live"]
           },
           "createdAt": {
             "type": "string",
@@ -1535,7 +1536,7 @@
           },
           "mode": {
             "type": "string",
-            "enum": ["test", "live"]
+            "enum": ["sandbox", "live"]
           },
           "createdAt": {
             "type": "string",
@@ -1603,7 +1604,7 @@
           },
           "mode": {
             "type": "string",
-            "enum": ["test", "live"]
+            "enum": ["sandbox", "live"]
           }
         },
         "required": [
@@ -1648,7 +1649,7 @@
           },
           "mode": {
             "type": "string",
-            "enum": ["test", "live"]
+            "enum": ["sandbox", "live"]
           },
           "createdAt": {
             "type": "string",
@@ -2946,7 +2947,7 @@
                   },
                   "interval": {
                     "type": "string",
-                    "enum": ["day", "week", "month", "year"]
+                    "enum": ["day", "week", "month", "year", "minute"]
                   },
                   "intervalCount": {
                     "type": "integer",
@@ -6064,7 +6065,7 @@
                   "dunningIntervalsHours": {
                     "type": "array",
                     "items": {
-                      "type": "integer",
+                      "type": "number",
                       "exclusiveMinimum": true,
                       "minimum": 0
                     },

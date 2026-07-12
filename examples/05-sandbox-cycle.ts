@@ -42,9 +42,14 @@ console.log(`subscribed: ${subscription.status}`);
 // attempt, ledger, dunning, webhooks.
 const cycle = await nombaone.sandbox.advanceCycle(subscription.id);
 console.log(`cycle outcome: ${cycle.outcome}`);
-console.log(
-  `invoice ${cycle.invoice.id}: ₦${(cycle.invoice.totalInKobo / 100).toFixed(2)} → ${cycle.invoice.status}`
-);
+// No invoice when the outcome is `canceled` — a subscription flagged
+// cancel-at-period-end ends at the boundary rather than renewing.
+if (cycle.invoice) {
+  const { id, totalInKobo, status } = cycle.invoice;
+  console.log(`invoice ${id}: ₦${(totalInKobo / 100).toFixed(2)} → ${status}`);
+} else {
+  console.log('no invoice — the subscription ended at this boundary');
+}
 
 // See what recovery is doing about it.
 const dunning = await nombaone.subscriptions.dunning.retrieve(subscription.id);

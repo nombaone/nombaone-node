@@ -92,7 +92,12 @@ export type {
   PlanUpdateParams,
 } from './resources/plans.js';
 export { Prices } from './resources/prices.js';
-export type { Price, PriceCreateParams, PriceListParams } from './resources/prices.js';
+export type {
+  Price,
+  PriceCreateParams,
+  PriceInterval,
+  PriceListParams,
+} from './resources/prices.js';
 export {
   Subscriptions,
   SubscriptionSchedules,

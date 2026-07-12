@@ -5,6 +5,18 @@ import type { Kobo, Metadata, Mode, RequestOptions } from '../core-types.js';
 import type { PagePromise } from '../pagination.js';
 
 /**
+ * A billing cadence UNIT. Multiply it with `intervalCount` to get the cadence:
+ * `month` × 3 is quarterly, `minute` × 10 is every ten minutes. There is no
+ * `quarterly` or `ten_minutely` unit — the count covers every multiple.
+ *
+ * `day`/`week`/`month`/`year` are calendar cadences (a boundary lands on a calendar
+ * date at 02:00 Africa/Lagos; month and year snap end-of-month against the anchor
+ * day). `minute` is a wall-clock cadence: it bills at an exact offset from the
+ * instant the subscription activated.
+ */
+export type PriceInterval = 'day' | 'week' | 'month' | 'year' | 'minute';
+
+/**
  * How much a plan costs per billing interval. Prices are **immutable** once
  * created — to change pricing, create a new price and deactivate the old one.
  * Existing subscriptions keep the price they were sold at.
@@ -17,7 +29,7 @@ export interface Price {
   /** Amount per unit per interval, integer kobo (₦1.00 = 100). */
   unitAmountInKobo: Kobo;
   currency: 'NGN';
-  interval: 'day' | 'week' | 'month' | 'year';
+  interval: PriceInterval;
   intervalCount: number;
   usageType: 'licensed' | 'metered';
   billingScheme: 'per_unit' | 'tiered';
@@ -34,7 +46,7 @@ export interface PriceCreateParams {
    * ₦250,000. Multiply naira by 100 exactly once.
    */
   unitAmountInKobo: Kobo;
-  interval: 'day' | 'week' | 'month' | 'year';
+  interval: PriceInterval;
   /** Bill every N intervals. Defaults to `1` server-side. */
   intervalCount?: number;
   /** Defaults to `licensed` server-side. */
