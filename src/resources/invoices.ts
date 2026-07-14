@@ -8,6 +8,20 @@ import type { InvoiceLineItem } from './shared.js';
 export type InvoiceStatus = 'draft' | 'open' | 'partially_paid' | 'paid' | 'void' | 'uncollectible';
 
 /**
+ * Bank-transfer (NUBAN) instructions for collecting an invoice over the push
+ * rail — show these to the payer verbatim. Present when the engine issued a
+ * virtual account for the invoice; `null` otherwise.
+ */
+export interface InvoicePayInstructions {
+  bankName: string | null;
+  accountNumber: string | null;
+  accountName: string | null;
+  /** The EXACT amount to transfer — it is matched automatically. Integer kobo. */
+  amountInKobo: number;
+  reference: string | null;
+}
+
+/**
  * What a billing cycle produced. You never create invoices — subscription
  * cycles do; amounts are locked at finalization. All amounts integer kobo.
  */
@@ -30,6 +44,11 @@ export interface Invoice {
   periodStart: string | null;
   periodEnd: string | null;
   dueDate: string | null;
+  /**
+   * Bank-transfer instructions when the invoice is collected by transfer
+   * (`send_invoice` / virtual account); `null` for card-collected invoices.
+   */
+  payInstructions: InvoicePayInstructions | null;
   lineItems: InvoiceLineItem[];
   finalizedAt: string | null;
   paidAt: string | null;

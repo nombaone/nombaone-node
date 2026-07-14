@@ -93,8 +93,11 @@ describe('subscriptions', () => {
     await client.subscriptions.change(SUB, { priceId: 'p2', prorationBehavior: 'none' });
     expect(last(mock).body).toEqual({ priceId: 'p2', prorationBehavior: 'none' });
 
-    await client.subscriptions.updatePaymentMethod(SUB, { checkoutToken: 'tok_1' });
+    await client.subscriptions.updatePaymentMethod(SUB, {
+      paymentMethodReference: 'nbo000000000001pmt',
+    });
     expect(last(mock).url).toBe(`http://api.test/v1/subscriptions/${SUB}/payment-method`);
+    expect(last(mock).body).toEqual({ paymentMethodReference: 'nbo000000000001pmt' });
 
     await client.subscriptions.retrieveUpcomingInvoice(SUB);
     expect(last(mock).url).toBe(`http://api.test/v1/subscriptions/${SUB}/upcoming-invoice`);

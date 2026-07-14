@@ -43,6 +43,15 @@ export interface Subscription {
   defaultPaymentMethodId: string | null;
   items: SubscriptionItem[];
   latestInvoiceId: string | null;
+  /**
+   * The Nomba hosted-checkout link for the FIRST payment — present only on the
+   * CREATE response of a hosted-checkout entry (`charge_automatically`, no
+   * `paymentMethodId`, no trial). Redirect the end user here; paying activates
+   * the subscription and captures a reusable card for silent renewals. `null`
+   * everywhere else (PM-attached creates, trials, `send_invoice`, and all
+   * reads).
+   */
+  checkoutLink: string | null;
   currency: 'NGN';
   mode: Mode;
   createdAt: string;
@@ -128,8 +137,11 @@ export interface SubscriptionCreateParams {
   /** `nbo…prc` — subscriptions reference a price, not a plan. */
   priceId: string;
   /**
-   * Required for `charge_automatically` unless `trialDays > 0` (the first
-   * charge is deferred to trial end).
+   * Optional. Omitting it on a `charge_automatically` create is the
+   * HOSTED-CHECKOUT entry (the common storefront flow): the subscription
+   * starts `incomplete` and the response carries a {@link Subscription.checkoutLink}
+   * — redirect your end user there; paying activates the subscription and
+   * captures a reusable card for silent renewals.
    */
   paymentMethodId?: string;
   /** Defaults to `charge_automatically` server-side. */
@@ -137,6 +149,11 @@ export interface SubscriptionCreateParams {
   trialDays?: number;
   /** Defaults to `1` server-side. */
   quantity?: number;
+  /**
+   * Where the hosted checkout returns the end user after paying
+   * (hosted-checkout entry only).
+   */
+  callbackUrl?: string;
   metadata?: Metadata;
 }
 
@@ -186,12 +203,14 @@ export interface SubscriptionChangeParams {
   prorationBehavior?: 'create_prorations' | 'none';
 }
 
-/** Exactly one of `paymentMethodReference` or `checkoutToken`. */
 export interface SubscriptionUpdatePaymentMethodParams {
-  /** An already-captured payment method (`nbo…pmt`). */
-  paymentMethodReference?: string;
-  /** A fresh hosted-checkout token — attaches and swaps atomically. */
-  checkoutToken?: string;
+  /**
+   * An already-captured payment method (`nbo…pmt`) belonging to the
+   * subscription's customer. Raw checkout tokens are not accepted — fresh
+   * cards are captured through the hosted checkout, which attaches the
+   * payment method server-side.
+   */
+  paymentMethodReference: string;
 }
 
 export interface SubscriptionScheduleCreateParams {
@@ -318,7 +337,22 @@ export class Subscriptions extends APIResource {
    * API requires an `Idempotency-Key`; the SDK sends one automatically and
    * reuses it across its own retries.
    *
-   * @throws {ValidationError} 422 — e.g. a missing payment method without a trial.
+   * Omit `paymentMethodId` (on `charge_automatically`, no trial) for the
+   * hosted-checkout entry: the subscription starts `incomplete` and the
+   * response's `checkoutLink` is where you redirect the end user — paying
+   * there activates it and saves the card for renewals.
+   *
+   * @example
+   * ```ts
+   * const subscription = await nombaone.subscriptions.create({
+   *   customerId: customer.id,
+   *   priceId: price.id,
+   *   callbackUrl: 'https://yourapp.example/billing/done',
+   * });
+   * if (subscription.checkoutLink) redirect(subscription.checkoutLink);
+   * ```
+   *
+   * @throws {ValidationError} 422 — e.g. a malformed `callbackUrl`.
    * @throws {ConflictError} 409 `SUBSCRIPTION_PAYMENT_METHOD_REQUIRED`
    */
   create(params: SubscriptionCreateParams, options?: RequestOptions): APIPromise<Subscription> {
@@ -482,8 +516,9 @@ export class Subscriptions extends APIResource {
 
   /**
    * Swap the payment method that bills this subscription — the card-update
-   * path during dunning. Exactly one of `paymentMethodReference` or
-   * `checkoutToken`.
+   * path during dunning. Takes an already-captured `paymentMethodReference`
+   * only; to capture a NEW card, send the customer through the hosted
+   * checkout first.
    *
    * Returns the updated **PaymentMethod** (not the subscription) — that is
    * what the wire actually carries, whatever the spec says.

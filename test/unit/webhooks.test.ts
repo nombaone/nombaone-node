@@ -1,9 +1,13 @@
-import { createHmac } from 'node:crypto';
+import { createHash, createHmac } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
 
 import { WebhookVerificationError, webhooks } from '../../src/index.js';
 
 const SECRET = 'nbo_whsec_0123456789abcdef0123456789abcdef';
+
+// The wire recipe's key derivation: the HMAC key is sha256(plaintext secret) hex.
+// The SDK does this internally; the server signs with the stored hash directly.
+const keyFor = (secret: string) => createHash('sha256').update(secret).digest('hex');
 
 const eventBody = (over?: Record<string, unknown>) =>
   JSON.stringify({
@@ -19,7 +23,7 @@ const eventBody = (over?: Record<string, unknown>) =>
   });
 
 const sign = (payload: string, secret = SECRET, timestamp = Math.floor(Date.now() / 1000)) =>
-  `t=${timestamp},v1=${createHmac('sha256', secret).update(`${timestamp}.${payload}`).digest('hex')}`;
+  `t=${timestamp},v1=${createHmac('sha256', keyFor(secret)).update(`${timestamp}.${payload}`).digest('hex')}`;
 
 describe('webhooks.verifySignature', () => {
   it('accepts a correctly signed payload (string and Buffer)', () => {
@@ -29,15 +33,26 @@ describe('webhooks.verifySignature', () => {
     expect(() => webhooks.verifySignature(Buffer.from(payload), header, SECRET)).not.toThrow();
   });
 
-  it('matches the documented algorithm exactly: HMAC-SHA256(secret, `${t}.${body}`) hex', () => {
+  it('matches the documented algorithm exactly: HMAC-SHA256(sha256(secret) hex, `${t}.${body}`) hex', () => {
     const payload = '{"a":1}';
     const t = 1_751_600_000;
-    const expected = createHmac('sha256', SECRET).update(`${t}.${payload}`).digest('hex');
+    const expected = createHmac('sha256', keyFor(SECRET)).update(`${t}.${payload}`).digest('hex');
     expect(() =>
       webhooks.verifySignature(payload, `t=${t},v1=${expected}`, SECRET, {
         tolerance: Number.MAX_SAFE_INTEGER,
       })
     ).not.toThrow();
+  });
+
+  it('hashes the plaintext internally: an HMAC keyed by the raw plaintext must NOT verify', () => {
+    const payload = '{"a":1}';
+    const t = 1_751_600_000;
+    const wrongV1 = createHmac('sha256', SECRET).update(`${t}.${payload}`).digest('hex');
+    expect(() =>
+      webhooks.verifySignature(payload, `t=${t},v1=${wrongV1}`, SECRET, {
+        tolerance: Number.MAX_SAFE_INTEGER,
+      })
+    ).toThrowError(/signature verification failed/);
   });
 
   it('rejects a tampered payload', () => {
@@ -88,8 +103,10 @@ describe('webhooks.verifySignature', () => {
   it('accepts any matching v1 among several (secret rotation)', () => {
     const payload = eventBody();
     const t = Math.floor(Date.now() / 1000);
-    const good = createHmac('sha256', SECRET).update(`${t}.${payload}`).digest('hex');
-    const stale = createHmac('sha256', 'nbo_whsec_old').update(`${t}.${payload}`).digest('hex');
+    const good = createHmac('sha256', keyFor(SECRET)).update(`${t}.${payload}`).digest('hex');
+    const stale = createHmac('sha256', keyFor('nbo_whsec_old'))
+      .update(`${t}.${payload}`)
+      .digest('hex');
     const header = `t=${t},v1=${stale},v1=${good}`;
     expect(() => webhooks.verifySignature(payload, header, SECRET)).not.toThrow();
   });

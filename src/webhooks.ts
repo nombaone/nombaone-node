@@ -1,4 +1,4 @@
-import { createHmac, timingSafeEqual } from 'node:crypto';
+import { createHash, createHmac, timingSafeEqual } from 'node:crypto';
 
 import { WebhookVerificationError } from './error.js';
 
@@ -15,8 +15,20 @@ export interface WebhookVerifyOptions {
 
 const DEFAULT_TOLERANCE_SECONDS = 300;
 
-const computeSignature = (secret: string, timestamp: string, rawBody: string): string =>
-  createHmac('sha256', secret).update(`${timestamp}.${rawBody}`).digest('hex');
+/**
+ * The wire recipe: the HMAC key is the sha256 (hex) of the PLAINTEXT signing
+ * secret (`nbo_whsec_…`) — derived here internally, so callers always pass the
+ * plaintext they were shown at endpoint creation. The server stores only that
+ * hash and signs with it directly; hashing here is what makes both sides agree.
+ * `v1 = HMAC-SHA256(sha256(secret) hex, `${t}.${rawBody}`)`, hex output.
+ *
+ * Kept in lockstep with `@nombaone/sara/webhooks` (sign.ts) and its
+ * `webhook-sdk-conformance` fixture — change both together.
+ */
+const computeSignature = (secret: string, timestamp: string, rawBody: string): string => {
+  const key = createHash('sha256').update(secret).digest('hex');
+  return createHmac('sha256', key).update(`${timestamp}.${rawBody}`).digest('hex');
+};
 
 const constantTimeEquals = (a: string, b: string): boolean => {
   const bufferA = Buffer.from(a, 'utf8');
@@ -50,7 +62,9 @@ const parseSignatureHeader = (header: string): { timestamp: string; signatures: 
  *
  * Available as `nombaone.webhooks` on a client, or standalone via
  * `import { webhooks } from '@nombaone/node'` — verification needs only the
- * endpoint's signing secret, never an API key.
+ * endpoint's PLAINTEXT signing secret (the `nbo_whsec_…` shown once at endpoint
+ * creation), never an API key. The secret is hashed internally (sha256) to
+ * derive the HMAC key; you never do that yourself.
  *
  * **Feed it the raw request body.** `JSON.parse` + `JSON.stringify` can
  * reorder keys and change bytes, which breaks the signature. Capture the
@@ -66,7 +80,8 @@ export class Webhooks {
    *
    * @param payload The exact raw request body (string or Buffer).
    * @param signatureHeader The `X-Nombaone-Signature` header value.
-   * @param secret The endpoint's signing secret (shown once at creation).
+   * @param secret The endpoint's plaintext signing secret (`nbo_whsec_…`,
+   * shown once at creation). It is hashed internally before the HMAC.
    * @throws {WebhookVerificationError} On a missing/malformed header, a
    * stale timestamp, an invalid signature, or a non-JSON body.
    *
@@ -167,7 +182,9 @@ export class Webhooks {
 
   /**
    * Build a valid `X-Nombaone-Signature` header for a payload — for testing
-   * your own handler without waiting on a real delivery.
+   * your own handler without waiting on a real delivery. Pass the plaintext
+   * signing secret; it is hashed internally exactly like the real sender's key
+   * derivation, so the header verifies under {@link constructEvent}.
    *
    * @example
    * ```ts

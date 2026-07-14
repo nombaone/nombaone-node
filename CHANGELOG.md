@@ -13,3 +13,10 @@ Initial release.
 ## 0.1.3
 
 - Fix: `WebhookEvent` is now a closed discriminated union so narrowing on `event.type` actually types `event.data` (the open catch-all member made narrowed payloads collapse to `unknown`). New `UnknownWebhookEvent` type is the explicit escape hatch for event types newer than your SDK.
+
+## 0.1.5
+
+- `Subscription.checkoutLink` (create-response only) + `SubscriptionCreateParams.callbackUrl` — the hosted-checkout entry: create without a `paymentMethodId` and redirect the end user to `checkoutLink`; paying there activates the subscription and captures a reusable card.
+- `Invoice.payInstructions` — the NUBAN bank-transfer block (`bankName` / `accountNumber` / `accountName` / exact `amountInKobo` / `reference`) for transfer-collected invoices; `null` otherwise.
+- Breaking: `subscriptions.updatePaymentMethod` no longer accepts `checkoutToken` — the API removed the raw-token path (an unverified string must never become a chargeable credential). Pass an already-captured `paymentMethodReference`; new cards are captured through the hosted checkout.
+- Docs: `AdvanceCycleResult.outcome` now documents the `awaiting_payment` value, and the `sandbox.advanceCycle` example guards `result.invoice` (nullable since 0.1.4).

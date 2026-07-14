@@ -30,7 +30,11 @@ export interface SandboxPaymentMethodParams {
 export interface AdvanceCycleResult {
   domain: 'advance_cycle_result';
   subscriptionId: string;
-  /** The cycle's billing outcome: `paid` | `past_due` | `pending` | `open` | `canceled`. */
+  /**
+   * The cycle's billing outcome: `paid` | `past_due` | `pending` | `open` |
+   * `canceled` | `awaiting_payment` (a hosted-checkout / action-required cycle
+   * that is waiting on the end customer to pay before it can settle).
+   */
   outcome: string;
   /**
    * The invoice the cycle produced (or the existing one if already billed). `null`
@@ -104,8 +108,11 @@ export class Sandbox extends APIResource {
    * @example
    * ```ts
    * const result = await nombaone.sandbox.advanceCycle(subscription.id);
-   * console.log(result.outcome);              // "paid"
-   * console.log(result.invoice.totalInKobo);  // the real invoice it produced
+   * console.log(result.outcome); // "paid"
+   * if (result.invoice) {
+   *   // null when the outcome is "canceled" — nothing was billed.
+   *   console.log(result.invoice.totalInKobo); // the real invoice it produced
+   * }
    * ```
    */
   advanceCycle(subscriptionId: string, options?: RequestOptions): APIPromise<AdvanceCycleResult> {

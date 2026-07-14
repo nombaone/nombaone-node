@@ -162,7 +162,7 @@ app.post('/nombaone/webhooks', express.raw({ type: 'application/json' }), (req, 
 });
 ```
 
-`constructEvent` checks the `X-Nombaone-Signature` (`t=<unix>,v1=<hex>`, HMAC-SHA256 over `` `${t}.${body}` ``) in constant time, rejects stale timestamps (300s tolerance, configurable), and returns a fully-typed 30+-member event union. `webhooks.generateTestHeader()` lets you unit-test your handler. Manage endpoints via `nombaone.webhookEndpoints` (create/rotate return the secret **exactly once**).
+`constructEvent` checks the `X-Nombaone-Signature` (`t=<unix>,v1=<hex>`, HMAC-SHA256 over `` `${t}.${body}` `` keyed by the SHA-256 of your plaintext signing secret — pass the `nbo_whsec_…` you were shown at endpoint creation; the SDK hashes it internally) in constant time, rejects stale timestamps (300s tolerance, configurable), and returns a fully-typed 30+-member event union. `webhooks.generateTestHeader()` lets you unit-test your handler. Manage endpoints via `nombaone.webhookEndpoints` (create/rotate return the secret **exactly once**).
 
 ## The full surface
 
